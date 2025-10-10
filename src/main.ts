@@ -5,16 +5,19 @@ import wormURL from "./worm.png";
 let counter: number = 0;
 
 document.body.innerHTML = `
-  <h1>Help me feed my axolotl so that he can grow big and strong and become president of the galaxy</h1>
-  <p>Fed <span id="counter">0</span> times</p>
+  <div id="body">
+    <h1>Help me feed my axolotl so that he can grow big and strong and become president of the galaxy</h1>
+    <p>Fed <span id="counter">0</span> times</p>
+    <div id="main">
+    
+      <img id= "axolotl" src=${axolotlURL} alt="axolotl icon">
 
-  <button id="increment">
-    <p id = "feed"> FEED 
-      <img id= "worm" src=${wormURL} alt="worm icon">
-    </p>
-  </button>
-  
-  <img id= "axolotl" src=${axolotlURL} alt="axolotl icon">
+      <button id="increment">
+          <img id= "worm" src=${wormURL} alt="worm icon">
+      </button>
+
+    </div>
+  </div>
 `;
 
 const button = document.getElementById("increment")!;
