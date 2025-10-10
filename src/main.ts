@@ -34,9 +34,23 @@ button.addEventListener("click", () => {
 
 // step 3
 
-setInterval(() => {
-  counter += 1;
-  counterElement.textContent = counter.toString();
-}, 1000);
+// setInterval(() => {
+//   counter += 1;
+//   counterElement.textContent = counter.toString();
+// }, 1000);
+
+// step 4
+
+let lastTime = performance.now();
+
+function grow(now: number) {
+  const deltaSeconds = (now - lastTime) / 1000;
+  counter += deltaSeconds;
+  counterElement.textContent = counter.toFixed(0);
+  lastTime = now;
+  requestAnimationFrame(grow);
+}
+
+requestAnimationFrame(grow);
 
 console.log("RUNNING");
