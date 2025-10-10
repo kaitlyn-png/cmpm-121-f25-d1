@@ -27,7 +27,7 @@ document.body.innerHTML = `
 
 const button = document.getElementById("increment")!;
 const counterElement = document.getElementById("counter")!;
-const upgradeButton = document.getElementById("upgrade")!;
+const upgradeButton = document.getElementById("upgrade") as HTMLButtonElement;
 const hatCostElement = document.getElementById("hatCost")!;
 
 button.addEventListener("click", () => {
