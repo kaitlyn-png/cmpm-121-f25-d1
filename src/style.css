@@ -27,3 +27,18 @@ body {
 #worm {
   width: 64px;
 }
+
+#upgrade {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: lightgreen;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.disabled {
+  background-color: grey;
+  cursor: not-allowed;
+}

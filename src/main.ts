@@ -3,6 +3,8 @@ import "./style.css";
 import wormURL from "./worm.png";
 
 let counter: number = 0;
+let growthRate: number = 0;
+let hatCost: number = 10;
 
 document.body.innerHTML = `
   <div id="body">
@@ -15,39 +17,51 @@ document.body.innerHTML = `
       <button id="increment">
           <img id= "worm" src=${wormURL} alt="worm icon">
       </button>
+      <button id="upgrade" disabled>
+          Buy Hat (+1/sec, Cost: <span id="hatCost">10</span>)
+      </button>
 
     </div>
   </div>
 `;
 
-// step 1
-
 const button = document.getElementById("increment")!;
 const counterElement = document.getElementById("counter")!;
-
-// step 2
+const upgradeButton = document.getElementById("upgrade")!;
+const hatCostElement = document.getElementById("hatCost")!;
 
 button.addEventListener("click", () => {
   counter += 1;
   counterElement.textContent = counter.toString();
+  updateUpgradeButton();
 });
 
-// step 3
+function updateUpgradeButton() {
+  upgradeButton.disabled = counter < hatCost;
+}
 
-// setInterval(() => {
-//   counter += 1;
-//   counterElement.textContent = counter.toString();
-// }, 1000);
-
-// step 4
+upgradeButton.addEventListener("click", () => {
+  if (counter >= hatCost) {
+    counter -= hatCost;
+    growthRate += 1;
+    hatCost += 10;
+    counterElement.textContent = counter.toString();
+    hatCostElement.textContent = hatCost.toString();
+    updateUpgradeButton();
+    console.log(
+      "Upgrade purchased! Growth rate is now " + growthRate + " per second.",
+    );
+  }
+});
 
 let lastTime = performance.now();
 
 function grow(now: number) {
   const deltaSeconds = (now - lastTime) / 1000;
-  counter += deltaSeconds;
+  counter += growthRate * deltaSeconds;
   counterElement.textContent = counter.toFixed(0);
   lastTime = now;
+  updateUpgradeButton();
   requestAnimationFrame(grow);
 }
 
