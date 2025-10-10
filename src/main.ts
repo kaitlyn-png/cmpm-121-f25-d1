@@ -20,13 +20,23 @@ document.body.innerHTML = `
   </div>
 `;
 
+// step 1
+
 const button = document.getElementById("increment")!;
 const counterElement = document.getElementById("counter")!;
+
+// step 2
 
 button.addEventListener("click", () => {
   counter += 1;
   counterElement.textContent = counter.toString();
-  console.log("Times fed: ", button, counterElement, counter);
 });
+
+// step 3
+
+setInterval(() => {
+  counter += 1;
+  counterElement.textContent = counter.toString();
+}, 1000);
 
 console.log("RUNNING");
