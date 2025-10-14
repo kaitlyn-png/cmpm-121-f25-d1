@@ -10,13 +10,13 @@ const upgrades = [
 ];
 
 let counter: number = 0;
-let growthRate: number = 0;
+let growthRate: number = 1;
 
 // Build upgrade buttons HTML
 const upgradesHTML = upgrades
   .map(
     (u) =>
-      `<button id="upgrade-${u.id}" disabled>
+      `<button id="upgrade-${u.id}" class="buttons" disabled>
       Buy ${u.name} (+${u.rate}/sec, Cost: <span id="${u.id}Cost">${u.cost}</span>)
     </button>`,
   )
@@ -24,8 +24,9 @@ const upgradesHTML = upgrades
 
 document.body.innerHTML = `
   <div id="body">
-    <h1>Help me feed my axolotl so that he can grow big and strong and become president of the galaxy</h1>
-    <p>Fed <span id="counter">0</span> times</p>
+    <p id ="help">Help me feed my axolotl so that he can grow big and strong and become president of the galaxy</p>
+    <p class = "text">Fed <span id="counter">0</span> times <br />
+    Growth Rate: <span id="growthRate">0</span> per second</p>
     <div id="main">
       <img id="axolotl" src=${axolotlURL} alt="axolotl icon">
       <button id="increment">
@@ -38,6 +39,9 @@ document.body.innerHTML = `
 
 const button = document.getElementById("increment")!;
 const counterElement = document.getElementById("counter")!;
+const growthRateElement = document.getElementById("growthRate")!;
+
+growthRateElement.textContent = growthRate.toFixed(2);
 
 // Update all upgrade buttons based on current counter
 function updateUpgradeButtons() {
@@ -63,9 +67,11 @@ upgrades.forEach((u) => {
       counter -= u.cost;
       growthRate += u.rate;
       u.cost += u.cost * 1.15; // Increase cost by 15%
+      u.cost = parseFloat(u.cost.toFixed(2));
       counterElement.textContent = counter.toString();
-      costSpan.textContent = u.cost.toString();
+      costSpan.textContent = u.cost.toFixed(2);
       updateUpgradeButtons();
+      growthRateElement.textContent = growthRate.toFixed(2);
       console.log(
         `Upgrade purchased: ${u.name}! Growth rate is now ${growthRate} per second.`,
       );
@@ -75,10 +81,12 @@ upgrades.forEach((u) => {
 
 let lastTime = performance.now();
 
-function grow(now: number) {
+function grow() {
+  const now = performance.now();
   const deltaSeconds = (now - lastTime) / 1000;
-  counter += deltaSeconds;
+  counter += deltaSeconds * growthRate;
   counterElement.textContent = counter.toFixed(0);
+  growthRateElement.textContent = growthRate.toFixed(2);
   lastTime = now;
   updateUpgradeButtons();
   requestAnimationFrame(grow);
