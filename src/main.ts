@@ -62,7 +62,7 @@ upgrades.forEach((u) => {
     if (counter >= u.cost) {
       counter -= u.cost;
       growthRate += u.rate;
-      u.cost += u.cost;
+      u.cost += u.cost * 1.15; // Increase cost by 15%
       counterElement.textContent = counter.toString();
       costSpan.textContent = u.cost.toString();
       updateUpgradeButtons();
@@ -77,7 +77,7 @@ let lastTime = performance.now();
 
 function grow(now: number) {
   const deltaSeconds = (now - lastTime) / 1000;
-  counter += deltaSeconds; // Increase by 1 unit per second, regardless of frame rate
+  counter += deltaSeconds;
   counterElement.textContent = counter.toFixed(0);
   lastTime = now;
   updateUpgradeButtons();
