@@ -4,14 +4,62 @@ import wormURL from "./worm.png";
 
 // Upgrade definitions
 const upgrades = [
-  { name: "Hat", cost: 10, rate: 1, id: "hat" },
-  { name: "Shirt", cost: 100, rate: 10, id: "shirt" },
-  { name: "Pants", cost: 1000, rate: 100, id: "pants" },
-  { name: "Shoes", cost: 10000, rate: 1000, id: "shoes" },
-  { name: "Watch", cost: 100000, rate: 10000, id: "watch" },
-  { name: "Car", cost: 1000000, rate: 100000, id: "car" },
-  { name: "Rocket Ship", cost: 10000000, rate: 1000000, id: "rocket" },
-  { name: "Nuke", cost: 100000000, rate: 10000000, id: "nuke" },
+  {
+    name: "Hat",
+    cost: 10,
+    rate: 0.5,
+    id: "hat",
+    description: "A stylish hat for your axolotl.",
+  },
+  {
+    name: "Shirt",
+    cost: 100,
+    rate: 1,
+    id: "shirt",
+    description: "A comfy shirt for your axolotl.",
+  },
+  {
+    name: "Pants",
+    cost: 1000,
+    rate: 10,
+    id: "pants",
+    description: "Durable pants for your axolotl.",
+  },
+  {
+    name: "Shoes",
+    cost: 10000,
+    rate: 100,
+    id: "shoes",
+    description: "Fast shoes to help your axolotl move quickly.",
+  },
+  {
+    name: "Watch",
+    cost: 100000,
+    rate: 1000,
+    id: "watch",
+    description: "A stylish watch for your axolotl.",
+  },
+  {
+    name: "Car",
+    cost: 1000000,
+    rate: 10000,
+    id: "car",
+    description: "A speedy car for your axolotl.",
+  },
+  {
+    name: "Rocket Ship",
+    cost: 10000000,
+    rate: 100000,
+    id: "rocket",
+    description: "A rocket ship for intergalactic travel.",
+  },
+  {
+    name: "Nuke",
+    cost: 100000000,
+    rate: 1000000,
+    id: "nuke",
+    description: "A powerful nuke for ultimate destruction.",
+  },
 ];
 
 let counter: number = 0;
@@ -41,6 +89,9 @@ document.body.innerHTML = `
       <button id="increment">
         <img id="worm" src=${wormURL} alt="worm icon">
       </button>
+      <div id="description-panel">
+        <p class="text" id="description-text"><span id="description">Your axolotl is being fed.</span></p>
+      </div>
     </div>
     <div id="upgrades-panel">
       <div class="upgrade-list">
@@ -53,6 +104,7 @@ document.body.innerHTML = `
 const button = document.getElementById("increment")!;
 const counterElement = document.getElementById("counter")!;
 const growthRateElement = document.getElementById("growthRate")!;
+const descriptionElement = document.getElementById("description")!;
 
 growthRateElement.textContent = growthRate.toFixed(1);
 
@@ -92,6 +144,8 @@ upgrades.forEach((u) => {
       costSpan.textContent = u.cost.toFixed(2);
       updateUpgradeButtons();
       growthRateElement.textContent = growthRate.toFixed(1);
+      descriptionElement.textContent =
+        `You bought him a ${u.name.toLowerCase()}! ${u.description || ""}`;
       console.log(
         `Upgrade purchased: ${u.name}! Growth rate is now ${growthRate} per second.`,
       );
