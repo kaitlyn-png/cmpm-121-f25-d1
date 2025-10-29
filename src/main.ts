@@ -2,7 +2,7 @@ import axolotlURL from "./axolotl.png";
 import "./style.css";
 import wormURL from "./worm.png";
 
-// TYPES 
+// TYPES
 
 type Upgrade = {
   name: string;
