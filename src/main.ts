@@ -2,6 +2,8 @@ import axolotlURL from "./axolotl.png";
 import "./style.css";
 import wormURL from "./worm.png";
 
+// TYPES 
+
 type Upgrade = {
   name: string;
   cost: number;
@@ -9,6 +11,8 @@ type Upgrade = {
   id: string;
   description: string;
 };
+
+// GAME DATA
 
 const upgrades: Upgrade[] = [
   {
@@ -69,8 +73,12 @@ const upgrades: Upgrade[] = [
   },
 ];
 
+// STATE
+
 let counter: number = 0;
 let growthRate: number = 1;
+
+// UI CONSTRUCTION
 
 const upgradesHTML = upgrades
   .map(
@@ -114,11 +122,9 @@ const descriptionElement = document.getElementById("description")!;
 
 growthRateElement.textContent = growthRate.toFixed(1);
 
-// Track upgrade counts
 const upgradeCounts: Record<string, number> = {};
 upgrades.forEach((u) => (upgradeCounts[u.id] = 0));
 
-// Update all upgrade buttons based on current counter
 function updateUpgradeButtons() {
   upgrades.forEach((u) => {
     const btn = document.getElementById(`upgrade-${u.id}`) as HTMLButtonElement;
@@ -128,14 +134,14 @@ function updateUpgradeButtons() {
   });
 }
 
-// Feed button
+// EVENT LISTENERS
+
 button.addEventListener("click", () => {
   counter += 1;
   counterElement.textContent = counter.toString();
   updateUpgradeButtons();
 });
 
-// Event listeners for each upgrade
 upgrades.forEach((u) => {
   const btn = document.getElementById(`upgrade-${u.id}`) as HTMLButtonElement;
   const costSpan = document.getElementById(`${u.id}Cost`)!;
