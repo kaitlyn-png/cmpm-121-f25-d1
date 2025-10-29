@@ -2,8 +2,15 @@ import axolotlURL from "./axolotl.png";
 import "./style.css";
 import wormURL from "./worm.png";
 
-// Upgrade definitions
-const upgrades = [
+type Upgrade = {
+  name: string;
+  cost: number;
+  rate: number;
+  id: string;
+  description: string;
+};
+
+const upgrades: Upgrade[] = [
   {
     name: "Hat",
     cost: 10,
@@ -65,7 +72,6 @@ const upgrades = [
 let counter: number = 0;
 let growthRate: number = 1;
 
-// Build upgrade buttons HTML (now using upgrade-btn and details)
 const upgradesHTML = upgrades
   .map(
     (u) =>
