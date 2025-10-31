@@ -94,9 +94,9 @@ const upgradesHTML = upgrades
   .join("\n");
 
 document.body.innerHTML = `
-  <div id="body" style="display: flex; flex-direction: row; min-height: 100vh;">
+  <div id="site">
     <div id="main">
-      <p id="help">Help me feed my axolotl so that he can grow big and strong and become president of the galaxy</p>
+      <p id="help">Help Me Feed my Axolotl! <br /> Grow Big and Strong to Become President of the Galaxy!</p>
       <p class="text">Fed <span id="counter">0</span> times <br />
       Growth Rate: <span id="growthRate">0</span> per second</p>
       <img id="axolotl" src=${axolotlURL} alt="axolotl icon">
